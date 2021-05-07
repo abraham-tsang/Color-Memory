@@ -220,13 +220,12 @@ class ColoredButtons extends React.Component{
         </View>
 	<View>
     <Dialog.Container visible={true}>
-      <Dialog.Title>Account delete</Dialog.Title>
+      <Dialog.Title>You won!!!</Dialog.Title>
       <Dialog.Description>
-        Do you want to delete this account? You cannot undo this action.
+        Your score is {this.state.score}. What is your name?
       </Dialog.Description>
       <Dialog.Input />
-      <Dialog.Button label="Cancel" />
-      <Dialog.Button label="Delete" />
+      <Dialog.Button label="OK" />
     </Dialog.Container>
 	</View>
       </View>
