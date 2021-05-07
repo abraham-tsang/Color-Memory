@@ -1,6 +1,5 @@
 import React from 'react';
-import { StyleSheet, Button, View, SafeAreaView, Text, Alert } from 'react-native';
-
+import { StyleSheet, Button, View, SafeAreaView, Text, Alert, TextInput, Modal, Dimensions } from 'react-native';
 
 var pairs = 8;
 var colors = ['blue', 'green', 'yellow', 'red', 'orange', 'pink', 'black', 'purple'];
@@ -69,6 +68,7 @@ class App extends React.Component{
  
   render(){
     return(
+	    
     <SafeAreaView style={styles.container}>
       <View>
       </View>
@@ -76,6 +76,7 @@ class App extends React.Component{
         <ColoredButtons />
       </View>
     </SafeAreaView>
+    
     );
   }
 
@@ -91,6 +92,7 @@ class ColoredButtons extends React.Component{
       reservedcolors: [],
       score: 0,
       number: 0,
+      isModalVisible: false,
     };
     this.changeColor = this.changeColor.bind(this);
   }
@@ -157,7 +159,8 @@ class ColoredButtons extends React.Component{
             break;
           }
 	  else if(i == 15 && originalcolors[i] == 'white'){
-	    this.setState({score: score});
+	    this.setState({score: score, isModalVisible: true});
+		  /*
             Alert.alert(
               "You won!!!",
               "Your score is " + this.state.score,
@@ -174,6 +177,7 @@ class ColoredButtons extends React.Component{
                 { text: "OK", onPress: () => console.log("OK Pressed") }
               ]
             );
+	    */
           }
         }
 
