@@ -1,0 +1,12 @@
+{
+  "name": "color-memory",
+  "displayName": "color-memory",
+  "expo": {
+    "name": "color-memory",
+    "slug": "color-memory",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
