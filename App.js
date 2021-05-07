@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Button, View, SafeAreaView, Text, Alert, TextInput, Modal, Dimensions } from 'react-native';
+import Dialog from 'react-native-dialog';
 
 var pairs = 8;
 var colors = ['blue', 'green', 'yellow', 'red', 'orange', 'pink', 'black', 'purple'];
@@ -178,6 +179,7 @@ class ColoredButtons extends React.Component{
               ]
             );
 	    */
+	    
           }
         }
 
@@ -211,9 +213,22 @@ class ColoredButtons extends React.Component{
     return(
       <View style={styles.columnofbuttons}>
         {col}
-        <View><Text>
-        {this.state.score}</Text>
+        <View>
+	  <Text>
+            {this.state.score}
+	  </Text>
         </View>
+	<View>
+    <Dialog.Container visible={true}>
+      <Dialog.Title>Account delete</Dialog.Title>
+      <Dialog.Description>
+        Do you want to delete this account? You cannot undo this action.
+      </Dialog.Description>
+      <Dialog.Input />
+      <Dialog.Button label="Cancel" />
+      <Dialog.Button label="Delete" />
+    </Dialog.Container>
+	</View>
       </View>
      
     );
