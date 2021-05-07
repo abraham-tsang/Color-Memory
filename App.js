@@ -93,7 +93,6 @@ class ColoredButtons extends React.Component{
       number: 0,
     };
     this.changeColor = this.changeColor.bind(this);
-    this.createThreeButtonAlert = this.createThreeButtonAlert.bind(this);
   }
  
   componentDidMount(){
@@ -158,9 +157,10 @@ class ColoredButtons extends React.Component{
             break;
           }
 	  else if(i == 15 && originalcolors[i] == 'white'){
+	    this.setState({score: score});
             Alert.alert(
-              "Alert Title",
-              "My Alert Msg",
+              "You won!!!",
+              "Your score is " + this.state.score,
               [
                 {
                   text: "Ask me later",
