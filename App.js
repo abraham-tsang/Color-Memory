@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Button, View, SafeAreaView, Text, Alert, TextInput, Modal, Dimensions } from 'react-native';
+import { StyleSheet, Button, View, SafeAreaView, Text, AsyncStorage } from 'react-native';
 import Dialog from 'react-native-dialog';
 
 var pairs = 8;
