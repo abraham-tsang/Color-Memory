@@ -93,7 +93,7 @@ class ColoredButtons extends React.Component{
       reservedcolors: [],
       score: 0,
       number: 0,
-      isModalVisible: false,
+      dialogVisible: false,
     };
     this.changeColor = this.changeColor.bind(this);
   }
@@ -160,26 +160,7 @@ class ColoredButtons extends React.Component{
             break;
           }
 	  else if(i == 15 && originalcolors[i] == 'white'){
-	    this.setState({score: score, isModalVisible: true});
-		  /*
-            Alert.alert(
-              "You won!!!",
-              "Your score is " + this.state.score,
-              [
-                {
-                  text: "Ask me later",
-                  onPress: () => console.log("Ask me later pressed")
-                },
-                {
-                  text: "Cancel",
-                  onPress: () => console.log("Cancel Pressed"),
-                  style: "cancel"
-                },
-                { text: "OK", onPress: () => console.log("OK Pressed") }
-              ]
-            );
-	    */
-	    
+	    this.setState({score: score, dialogVisible: true});
           }
         }
 
@@ -219,7 +200,7 @@ class ColoredButtons extends React.Component{
 	  </Text>
         </View>
 	<View>
-    <Dialog.Container visible={true}>
+    <Dialog.Container visible={this.state.dialogVisible}>
       <Dialog.Title>You won!!!</Dialog.Title>
       <Dialog.Description>
         Your score is {this.state.score}. What is your name?
