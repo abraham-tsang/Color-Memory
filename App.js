@@ -92,11 +92,15 @@ class ColoredButtons extends React.Component{
       originalcolors: [],
       reservedcolors: [],
       score: 0,
+      username: '',
       number: 0,
+      text: '',
       dialogVisible: false,
     };
     this.changeColor = this.changeColor.bind(this);
     //this.onChangeText = this.onChangeText.bind(this);
+    this.saveWinnerData = this.saveWinnerData.bind(this);
+    this.getWinnerData = this.getWinnerData.bind(this);
   }
  
   componentDidMount(){
@@ -170,8 +174,24 @@ class ColoredButtons extends React.Component{
     }
   }
 
-  onChangeText = (text) => {
+  onChangeText = (text) => { // Use arrow function for parameters
     this.setState({username: text})
+  }
+
+  async saveWinnerData(){
+      await AsyncStorage.setItem(
+	'Username 1', this.state.username
+      );
+      await AsyncStorage.setItem(
+	'Score 1', this.state.score
+      );
+    this.setState({dialogVisible: false});
+  }
+
+  async getWinnerData(){
+    var value = await AsyncStorage.getItem('Username 1');
+    var value2 = await AsyncStorage.getItem('Score 1');
+    this.setState({text: value, number: value2});
   }
 
   render(){
@@ -196,12 +216,18 @@ class ColoredButtons extends React.Component{
         </View>
       );
     }
+
+//	  this.getWinnerData();
+
     return(
       <View style={styles.columnofbuttons}>
         {col}
         <View>
 	  <Text>
-            {this.state.score}
+            {this.state.text}
+	  </Text>
+	  <Text>
+            {this.state.number}
 	  </Text>
         </View>
 	<View>
@@ -214,7 +240,7 @@ class ColoredButtons extends React.Component{
         Your score is {this.state.username}. What is your name?
       </Dialog.Description>
       <Dialog.Input onChangeText={this.onChangeText} />
-      <Dialog.Button label="OK" />
+      <Dialog.Button label="OK" onPress={this.saveWinnerData} />
     </Dialog.Container>
 	</View>
       </View>
