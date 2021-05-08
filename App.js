@@ -96,6 +96,7 @@ class ColoredButtons extends React.Component{
       dialogVisible: false,
     };
     this.changeColor = this.changeColor.bind(this);
+    //this.onChangeText = this.onChangeText.bind(this);
   }
  
   componentDidMount(){
@@ -168,7 +169,11 @@ class ColoredButtons extends React.Component{
       this.setState({score: score, coloreds: coloreds, originalcolors: originalcolors, reservedcolors: reservedcolors});
     }
   }
- 
+
+  onChangeText = (text) => {
+    this.setState({username: text})
+  }
+
   render(){
     var rows = [];
     var temp = [];
@@ -205,7 +210,10 @@ class ColoredButtons extends React.Component{
       <Dialog.Description>
         Your score is {this.state.score}. What is your name?
       </Dialog.Description>
-      <Dialog.Input />
+      <Dialog.Description>
+        Your score is {this.state.username}. What is your name?
+      </Dialog.Description>
+      <Dialog.Input onChangeText={this.onChangeText} />
       <Dialog.Button label="OK" />
     </Dialog.Container>
 	</View>
