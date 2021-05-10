@@ -93,7 +93,7 @@ class ColoredButtons extends React.Component{
       reservedcolors: [],
       score: 0,
       username: '',
-      number: 0,
+      number: '',
       text: '',
       dialogVisible: false,
     };
@@ -179,18 +179,30 @@ class ColoredButtons extends React.Component{
   }
 
   async saveWinnerData(){
-      await AsyncStorage.setItem(
-	'Username 1', this.state.username
-      );
-      await AsyncStorage.setItem(
-	'Score 1', this.state.score
-      );
+
     this.setState({dialogVisible: false});
+    var total = await AsyncStorage.getItem('total');
+    if(typeof(total) !== 'number'){
+      total = 0;
+    }
+    await AsyncStorage.setItem(
+      'Username ' + (parseInt(total) + 1).toString(), this.state.username
+    );
+    await AsyncStorage.setItem(
+      'Score ' + (parseInt(total) + 1).toString(), this.state.score.toString()
+    );
+    await AsyncStorage.setItem(
+      'total', (parseInt(total) + 1).toString()
+    );
+
   }
 
   async getWinnerData(){
-    var value = await AsyncStorage.getItem('Username 1');
-    var value2 = await AsyncStorage.getItem('Score 1');
+    var total = await AsyncStorage.getItem('total');
+    var value = await AsyncStorage.getItem('Username ' + total);
+    var value2 = await AsyncStorage.getItem('Score ' + total);
+
+
     this.setState({text: value, number: value2});
   }
 
@@ -217,7 +229,7 @@ class ColoredButtons extends React.Component{
       );
     }
 
-//	  this.getWinnerData();
+	 this.getWinnerData();
 
     return(
       <View style={styles.columnofbuttons}>
