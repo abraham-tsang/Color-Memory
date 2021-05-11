@@ -98,13 +98,35 @@ class RecordedScores extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      
+      total: '',
+      usernames: [],
+      scores: [],
     };
+  }
+
+  async componentDidMount(){
+    var total = await AsyncStorage.getItem('total');
+    if(total !== ''){
+      var usernames = [];
+      var scores = [];
+      var tempusername = '';
+      var tempscore = '';
+      for(var i = 0; i < parseInt(total); i++){
+	tempusername = await AsyncStorage.getItem('Username ' + i.toString());
+	usernames.push(tempusername);
+	tempscore = await AsyncStorage.getItem('Score ' + i.toString());
+	scores.push(tempscore);
+      }
+      await this.setState({total: total, usernames: usernames, scores: scores});
+    }
   }
 
   render(){
     return(
-      <Text>fuck</Text>
+      <View>
+      <Text>{this.state.usernames[0]}</Text>
+      <Text>{this.state.scores[0]}</Text>
+      </View>
     );
   }
 
