@@ -84,6 +84,7 @@ class App extends React.Component{
 	    <Text>Scores</Text>
 	  </Link>
           <Route exact path='/game' component={ColoredButtons} />
+          <Route exact path='/scores' component={RecordedScores} />
 	</NativeRouter>
       </View>
     </SafeAreaView>
@@ -93,6 +94,21 @@ class App extends React.Component{
 
 }
 
+class RecordedScores extends React.Component{
+  constructor(props){
+    super(props);
+    this.state = {
+      
+    };
+  }
+
+  render(){
+    return(
+      <Text>fuck</Text>
+    );
+  }
+
+}
 
 class ColoredButtons extends React.Component{
   constructor(props){
