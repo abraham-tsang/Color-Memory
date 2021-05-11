@@ -1,6 +1,8 @@
 import React from 'react';
 import { StyleSheet, Button, View, SafeAreaView, Text, AsyncStorage } from 'react-native';
 import Dialog from 'react-native-dialog';
+import {NativeRouter, Route, Link} from 'react-router-native';
+
 
 var pairs = 8;
 var colors = ['blue', 'green', 'yellow', 'red', 'orange', 'pink', 'black', 'purple'];
@@ -74,7 +76,15 @@ class App extends React.Component{
       <View>
       </View>
       <View>
-        <ColoredButtons />
+	<NativeRouter>
+	  <Link to='/game'>
+	    <Text>Game</Text>
+	  </Link>
+	  <Link to='/scores'>
+	    <Text>Scores</Text>
+	  </Link>
+          <Route exact path='/game' component={ColoredButtons} />
+	</NativeRouter>
       </View>
     </SafeAreaView>
     
@@ -101,6 +111,7 @@ class ColoredButtons extends React.Component{
     //this.onChangeText = this.onChangeText.bind(this);
     this.saveWinnerData = this.saveWinnerData.bind(this);
     this.getWinnerData = this.getWinnerData.bind(this);
+    this.clearData = this.clearData.bind(this);
   }
  
   componentDidMount(){
@@ -182,7 +193,7 @@ class ColoredButtons extends React.Component{
 
     this.setState({dialogVisible: false});
     var total = await AsyncStorage.getItem('total');
-    if(typeof(total) !== 'number'){
+    if(typeof(total) !== 'string'){
       total = 0;
     }
     await AsyncStorage.setItem(
@@ -202,8 +213,11 @@ class ColoredButtons extends React.Component{
     var value = await AsyncStorage.getItem('Username ' + total);
     var value2 = await AsyncStorage.getItem('Score ' + total);
 
-
     this.setState({text: value, number: value2});
+  }
+
+  async clearData(){
+    await AsyncStorage.clear();
   }
 
   render(){
@@ -229,7 +243,8 @@ class ColoredButtons extends React.Component{
       );
     }
 
-	 this.getWinnerData();
+	 //this.getWinnerData();
+	 this.clearData();
 
     return(
       <View style={styles.columnofbuttons}>
