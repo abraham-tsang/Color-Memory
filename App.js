@@ -78,10 +78,10 @@ class App extends React.Component{
       <View>
 	<NativeRouter>
 	  <Link to='/game'>
-	    <Text>Game</Text>
+	    <Text>Play Game</Text>
 	  </Link>
 	  <Link to='/scores'>
-	    <Text>Scores</Text>
+	    <Text>Read Scores</Text>
 	  </Link>
           <Route exact path='/game' component={ColoredButtons} />
           <Route exact path='/scores' component={RecordedScores} />
@@ -99,8 +99,6 @@ class RecordedScores extends React.Component{
     super(props);
     this.state = {
       total: [],
-      usernames: [],
-      scores: [],
       usernamesandscores: [],
     };
   }
@@ -127,7 +125,12 @@ class RecordedScores extends React.Component{
       for(var i = 0; i < parseInt(total[1]); i++){
 	usernamesandscores.push([usernames[i][1], scores[i][1]]);
       }
-      await this.setState({total: total, usernames: usernames, scores: scores, usernamesandscores: usernamesandscores});
+      usernamesandscores.sort(function(a, b) {
+        if (a[1] < b[1]) return -1;
+        if (a[1] > b[1]) return 1;
+        return 0;
+      });
+      await this.setState({total: total, usernamesandscores: usernamesandscores});
     }
   }
 
