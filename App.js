@@ -122,8 +122,8 @@ class RecordedScores extends React.Component{
 	usernamesandscores.push([usernames[i][1], scores[i][1]]);
       }
       usernamesandscores.sort(function(a, b) {
-        if (a[1] < b[1]) return -1;
-        if (a[1] > b[1]) return 1;
+        if (a[1] < b[1]) return 1;
+        if (a[1] > b[1]) return -1;
         return 0;
       });
       await this.setState({total: total, usernamesandscores: usernamesandscores});
@@ -134,7 +134,7 @@ class RecordedScores extends React.Component{
     var ranks = [];
     for(var i = 0; i < this.state.total[1]; i++){
       ranks.push(
-        <Text>{this.state.usernamesandscores[i][0] + ' ' + this.state.usernamesandscores[i][1]}</Text>
+        <Text>{(i+1).toString() + '. ' + this.state.usernamesandscores[i][0] + ' ' + this.state.usernamesandscores[i][1]}</Text>
       );
     }
 
@@ -156,14 +156,11 @@ class ColoredButtons extends React.Component{
       reservedcolors: [],
       score: 0,
       username: '',
-      number: '',
-      text: '',
       dialogVisible: false,
     };
     this.changeColor = this.changeColor.bind(this);
     //this.onChangeText = this.onChangeText.bind(this);
     this.saveWinnerData = this.saveWinnerData.bind(this);
-    this.getWinnerData = this.getWinnerData.bind(this);
     this.clearData = this.clearData.bind(this);
   }
  
@@ -261,14 +258,6 @@ class ColoredButtons extends React.Component{
 
   }
 
-  async getWinnerData(){
-    var total = await AsyncStorage.getItem('total');
-    var value = await AsyncStorage.getItem('Username ' + total);
-    var value2 = await AsyncStorage.getItem('Score ' + total);
-
-    this.setState({text: value, number: value2});
-  }
-
   async clearData(){
     await AsyncStorage.clear();
   }
@@ -296,18 +285,14 @@ class ColoredButtons extends React.Component{
       );
     }
 
-	 //this.getWinnerData();
-	 //this.clearData();
+    //this.clearData();
 
     return(
       <View style={styles.columnofbuttons}>
         {col}
         <View>
 	  <Text>
-            {this.state.text}
-	  </Text>
-	  <Text>
-            {this.state.number}
+            {this.state.score}
 	  </Text>
         </View>
 	<View>
