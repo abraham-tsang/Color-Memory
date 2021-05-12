@@ -70,25 +70,21 @@ class App extends React.Component{
   }
  
   render(){
-    return(
-	    
-    <SafeAreaView style={styles.container}>
-      <View>
-      </View>
-      <View>
-	<NativeRouter>
-	  <Link to='/game'>
-	    <Text>Play Game</Text>
-	  </Link>
-	  <Link to='/scores'>
-	    <Text>Read Scores</Text>
-	  </Link>
-          <Route exact path='/game' component={ColoredButtons} />
-          <Route exact path='/scores' component={RecordedScores} />
-	</NativeRouter>
-      </View>
-    </SafeAreaView>
-    
+    return(	    
+      <SafeAreaView style={styles.container}>
+        <View>
+          <NativeRouter>
+            <Link to='/game'>
+              <Text>Play Game</Text>
+            </Link>
+            <Link to='/scores'>
+              <Text>Read Scores</Text>
+            </Link>
+            <Route exact path='/game' component={ColoredButtons} />
+            <Route exact path='/scores' component={RecordedScores} />
+          </NativeRouter>
+        </View>
+      </SafeAreaView>
     );
   }
 
@@ -315,17 +311,17 @@ class ColoredButtons extends React.Component{
 	  </Text>
         </View>
 	<View>
-    <Dialog.Container visible={this.state.dialogVisible}>
-      <Dialog.Title>You won!!!</Dialog.Title>
-      <Dialog.Description>
-        Your score is {this.state.score}. What is your name?
-      </Dialog.Description>
-      <Dialog.Description>
-        Your score is {this.state.username}. What is your name?
-      </Dialog.Description>
-      <Dialog.Input onChangeText={this.onChangeText} />
-      <Dialog.Button label="OK" onPress={this.saveWinnerData} />
-    </Dialog.Container>
+          <Dialog.Container visible={this.state.dialogVisible}>
+            <Dialog.Title>You won!!!</Dialog.Title>
+            <Dialog.Description>
+              Your score is {this.state.score}. What is your name?
+            </Dialog.Description>
+            <Dialog.Description>
+              Your score is {this.state.username}. What is your name?
+            </Dialog.Description>
+            <Dialog.Input onChangeText={this.onChangeText} />
+            <Dialog.Button label="OK" onPress={this.saveWinnerData} />
+          </Dialog.Container>
 	</View>
       </View>
      
