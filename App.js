@@ -301,9 +301,6 @@ class ColoredButtons extends React.Component{
             <Dialog.Description>
               Your score is {this.state.score}. What is your name?
             </Dialog.Description>
-            <Dialog.Description>
-              Your score is {this.state.username}. What is your name?
-            </Dialog.Description>
             <Dialog.Input onChangeText={this.onChangeText} />
             <Dialog.Button label="OK" onPress={this.saveWinnerData} />
           </Dialog.Container>
