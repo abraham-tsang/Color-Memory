@@ -98,25 +98,30 @@ class RecordedScores extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      total: '',
+      total: [],
       usernames: [],
       scores: [],
     };
   }
 
   async componentDidMount(){
-    var total = await AsyncStorage.getItem('total');
-    if(total !== ''){
+    var keys = await AsyncStorage.getAllKeys();
+    if(keys.includes('total')){
+      var keysandvalues = await AsyncStorage.multiGet(keys);
+      var total = [];
       var usernames = [];
       var scores = [];
-      var tempusername = '';
-      var tempscore = '';
-      for(var i = 0; i < parseInt(total); i++){
-	tempusername = await AsyncStorage.getItem('Username ' + i.toString());
-	usernames.push(tempusername);
-	tempscore = await AsyncStorage.getItem('Score ' + i.toString());
-	scores.push(tempscore);
-      }
+      keysandvalues.forEach((element) => {
+        if(element[0] === 'total'){
+          total = element;
+        }
+	else if(element[0].substr(0, 5) === 'Score'){
+          scores.push(element);
+        }
+	else if(element[0].substr(0, 8) === 'Username'){
+          usernames.push(element);
+        }
+      });
       await this.setState({total: total, usernames: usernames, scores: scores});
     }
   }
@@ -124,8 +129,8 @@ class RecordedScores extends React.Component{
   render(){
     return(
       <View>
-      <Text>{this.state.usernames[0]}</Text>
-      <Text>{this.state.scores[0]}</Text>
+      <Text>{this.state.usernames}</Text>
+      <Text>{this.state.scores}</Text>
       </View>
     );
   }
@@ -282,7 +287,7 @@ class ColoredButtons extends React.Component{
     }
 
 	 //this.getWinnerData();
-	 this.clearData();
+	 //this.clearData();
 
     return(
       <View style={styles.columnofbuttons}>
