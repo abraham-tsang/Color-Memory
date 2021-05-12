@@ -101,6 +101,7 @@ class RecordedScores extends React.Component{
       total: [],
       usernames: [],
       scores: [],
+      usernamesandscores: [],
     };
   }
 
@@ -122,15 +123,25 @@ class RecordedScores extends React.Component{
           usernames.push(element);
         }
       });
-      await this.setState({total: total, usernames: usernames, scores: scores});
+      var usernamesandscores = [];
+      for(var i = 0; i < parseInt(total[1]); i++){
+	usernamesandscores.push([usernames[i][1], scores[i][1]]);
+      }
+      await this.setState({total: total, usernames: usernames, scores: scores, usernamesandscores: usernamesandscores});
     }
   }
 
   render(){
+    var ranks = [];
+    for(var i = 0; i < this.state.total[1]; i++){
+      ranks.push(
+        <Text>{this.state.usernamesandscores[i][0] + ' ' + this.state.usernamesandscores[i][1]}</Text>
+      );
+    }
+
     return(
       <View>
-      <Text>{this.state.usernames}</Text>
-      <Text>{this.state.scores}</Text>
+        {ranks}
       </View>
     );
   }
