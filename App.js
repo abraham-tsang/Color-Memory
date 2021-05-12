@@ -294,6 +294,9 @@ class ColoredButtons extends React.Component{
 	  <Text>
             {this.state.score}
 	  </Text>
+	  <Text>
+            {/*this.state.numbers // As hint in the future? As stabilizer now. */}
+	  </Text>
         </View>
 	<View>
           <Dialog.Container visible={this.state.dialogVisible}>
