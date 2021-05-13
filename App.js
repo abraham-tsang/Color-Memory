@@ -147,13 +147,8 @@ class RecordedScores extends React.Component{
       temp = [];
       rowofranks = [];
       temp.push((i+1).toString());
-      temp.push('. ');
       temp.push(this.state.usernamesandscores[i][0]);
-      temp.push(' ');
       temp.push(this.state.usernamesandscores[i][1]);
-      /*rowofranks.push(
-        temp
-      );*/
       ranks.push(
         temp
       );
@@ -169,7 +164,7 @@ class RecordedScores extends React.Component{
       */
       <View>
         <Table>
-          <Rows data={ranks}/>
+          <Rows data={ranks} style={{height: 30, width: 300}} flexArr={[1, 5, 1]} />
 	</Table>
       </View>
       
