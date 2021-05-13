@@ -85,7 +85,7 @@ class App extends React.Component{
           <NativeRouter>
             <View style={styles.gameview}>
               <Link to='/game'>
-                <Text>Play Game</Text>
+                <Text>Logo (Play Game)</Text>
               </Link>
 	    </View>
 	    <View style={styles.scoreview}>
