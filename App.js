@@ -26,6 +26,7 @@ function shuffle(array) {
 
   return array;
 }
+
 function colorNumbersGetter(){
 
   numbers = [];
@@ -47,6 +48,7 @@ function coloredsGetter(){
   }
   return coloreds;
 }
+
 function colorsGetter(){
   var originalcolors = [];
   for(var i = 0; i < pairs; i++){
@@ -55,6 +57,7 @@ function colorsGetter(){
   }
   return originalcolors;
 }
+
 function reservedColorsGetter(){
   var reservedcolors = [];
   for(var i = 0; i < numbers.length; i++){
@@ -120,20 +123,20 @@ class RecordedScores extends React.Component{
       var scores = [];
       keysandvalues.forEach((element) => {
         if(element[0] === 'total'){
-          total = element;
+          total = element; // Get total
         }
 	else if(element[0].substr(0, 5) === 'Score'){
-          scores.push(element);
+          scores.push(element); // Get scores
         }
 	else if(element[0].substr(0, 8) === 'Username'){
-          usernames.push(element);
+          usernames.push(element); // Get usernames
         }
       });
       var usernamesandscores = [];
       for(var i = 0; i < parseInt(total[1]); i++){
-	usernamesandscores.push([usernames[i][1], scores[i][1]]);
+	usernamesandscores.push([usernames[i][1], scores[i][1]]); // Combine usernames and scores
       }
-      usernamesandscores.sort(function(a, b) {
+      usernamesandscores.sort(function(a, b) { // Sort usernames and scores based on scores
         if (a[1] < b[1]) return 1;
         if (a[1] > b[1]) return -1;
         return 0;
@@ -244,7 +247,7 @@ class ColoredButtons extends React.Component{
        
         iarr = [];
 
-        
+        // Check if game is finished        
         for(var i = 0; i < originalcolors.length; i++){
           if(originalcolors[i] != 'white'){
             break;
