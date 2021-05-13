@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Button, View, SafeAreaView, Text, AsyncStorage } from 'react-native';
+import { StyleSheet, Button, View, SafeAreaView, Text, AsyncStorage, Dimensions } from 'react-native';
 import Dialog from 'react-native-dialog';
 import {NativeRouter, Route, Link} from 'react-router-native';
 import { Table, Row, Rows } from 'react-native-table-component';
@@ -7,6 +7,9 @@ import { Table, Row, Rows } from 'react-native-table-component';
 var pairs = 8;
 var colors = ['blue', 'green', 'yellow', 'red', 'orange', 'pink', 'black', 'purple'];
 var numbers = [];
+
+var windowWidth = Dimensions.get('window').width;
+var windowHeight = Dimensions.get('window').height;
 
 function shuffle(array) {
   var currentIndex = array.length, temporaryValue, randomIndex;
@@ -84,7 +87,7 @@ class App extends React.Component{
                 <Text>Read Scores</Text>
               </Link>
 	    </View>
-	    <View style={{position: 'absolute', top: 100, left: 50}}>
+	    <View style={{position: 'absolute', top: 30, left: 10/*, top: windowHeight/4, left: windowWidth/4, right: windowWidth/4*/}}>
             <Route exact path='/game' component={ColoredButtons} />
             <Route exact path='/scores' component={RecordedScores} />
 	    </View>
@@ -168,7 +171,7 @@ class RecordedScores extends React.Component{
         {ranks}
       </View>
       */
-      <View>
+      <View style={styles.listofranks}>
         <Table>
           <Rows data={ranks} style={{height: 30, width: 300}} flexArr={[1, 5, 1]} />
 	</Table>
@@ -375,6 +378,11 @@ const styles = StyleSheet.create({
   },
   columnofbuttons: {
     flexDirection: 'column',
+    position: 'absolute',
+    top: 200,
+    left: 100,
+    scaleX: 1.5,
+    scaleY: 1.5,
   },
   rowofbuttons: {
     flexDirection: 'row',
@@ -382,6 +390,12 @@ const styles = StyleSheet.create({
   buttonstyle: {
     height: 40,
     width: 40,
+  },
+  listofranks: {
+    position: 'absolute', 
+    left: 40, 
+    scaleX: 1.2, 
+    scaleY: 1.2
   },
 });
 
