@@ -28,6 +28,7 @@ function shuffle(array) {
 }
 function colorNumbersGetter(){
 
+  numbers = [];
   for(var i = 0; i < pairs; i++){
     numbers.push(i);
     numbers.push(i);
@@ -82,13 +83,16 @@ class App extends React.Component{
                 <Text>Play Game</Text>
               </Link>
 	    </View>
+	    <View style={{position: 'absolute', left: windowWidth/2, top: 5}}>
+              <Text>{this.state.score}</Text>
+	    </View>
 	    <View style={{position: 'absolute', right: 5, top: 5}}>
               <Link to='/scores'>
                 <Text>Read Scores</Text>
               </Link>
 	    </View>
 	    <View style={{position: 'absolute'}}>
-            <Route exact path='/game' component={ColoredButtons} />
+            <Route exact path='/game' render={() => <ColoredButtons />} />
             <Route exact path='/scores' component={RecordedScores} />
 	    </View>
           </NativeRouter>
@@ -309,11 +313,11 @@ class ColoredButtons extends React.Component{
       <View style={styles.columnofbuttons}>
         {col}
         <View>
-	  <Text>
+	  <Text style={styles.scorestyle}>
             {this.state.score}
 	  </Text>
 	  <Text>
-            {/*this.state.numbers // As hint in the future? As stabilizer now. */}
+            {this.state.numbers /* Maybe as hint in the future, now as stabilizer */ }
 	  </Text>
         </View>
 	<View>
@@ -380,6 +384,11 @@ const styles = StyleSheet.create({
     left: windowWidth/6, 
     scaleX: 1.2, 
     scaleY: 1.2
+  },
+  scorestyle: {
+    position: 'absolute',
+    top: 5,
+    left: windowWidth/2,
   },
 });
 
