@@ -87,7 +87,7 @@ class App extends React.Component{
                 <Text>Read Scores</Text>
               </Link>
 	    </View>
-	    <View style={{position: 'absolute', top: 30, left: 10/*, top: windowHeight/4, left: windowWidth/4, right: windowWidth/4*/}}>
+	    <View style={{position: 'absolute', top: 30, left: 10}}>
             <Route exact path='/game' component={ColoredButtons} />
             <Route exact path='/scores' component={RecordedScores} />
 	    </View>
@@ -141,15 +141,6 @@ class RecordedScores extends React.Component{
 
   render(){
     var ranks = [];
-   /* 
-    for(var i = 0; i < this.state.total[1]; i++){
-      ranks.push(
-        <Text>{(i+1).toString() + '. ' + this.state.usernamesandscores[i][0] + ' ' + this.state.usernamesandscores[i][1]}</Text>
-      );
-      
-    }
-    */
-	  
     var rowofranks = [];
     var temp = [];
     for(var i = 0; i < this.state.total[1]; i++){
@@ -163,20 +154,12 @@ class RecordedScores extends React.Component{
       );
     }
       
-	    
-
     return(
-      /*
-      <View>
-        {ranks}
-      </View>
-      */
       <View style={styles.listofranks}>
         <Table>
           <Rows data={ranks} style={{height: 30, width: 300}} flexArr={[1, 5, 1]} />
 	</Table>
       </View>
-      
     );
   }
 
