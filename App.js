@@ -87,7 +87,7 @@ class App extends React.Component{
                 <Text>Read Scores</Text>
               </Link>
 	    </View>
-	    <View style={{position: 'absolute', top: 30, left: 10}}>
+	    <View style={{position: 'absolute'}}>
             <Route exact path='/game' component={ColoredButtons} />
             <Route exact path='/scores' component={RecordedScores} />
 	    </View>
@@ -362,8 +362,8 @@ const styles = StyleSheet.create({
   columnofbuttons: {
     flexDirection: 'column',
     position: 'absolute',
-    top: 200,
-    left: 100,
+    top: windowHeight/3,
+    left: windowWidth/3.5,
     scaleX: 1.5,
     scaleY: 1.5,
   },
@@ -376,7 +376,8 @@ const styles = StyleSheet.create({
   },
   listofranks: {
     position: 'absolute', 
-    left: 40, 
+    top: windowHeight/3,
+    left: windowWidth/6, 
     scaleX: 1.2, 
     scaleY: 1.2
   },
