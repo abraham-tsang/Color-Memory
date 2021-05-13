@@ -71,7 +71,7 @@ class App extends React.Component{
  
   render(){
     return(	    
-      <SafeAreaView /*style={styles.container}*/>
+      <SafeAreaView>
         <View>
           <NativeRouter>
             <View style={{position: 'absolute', left: 5, top: 5}}>
@@ -84,7 +84,7 @@ class App extends React.Component{
                 <Text>Read Scores</Text>
               </Link>
 	    </View>
-	    <View style={styles.container}>
+	    <View style={{position: 'absolute', top: 100, left: 50}}>
             <Route exact path='/game' component={ColoredButtons} />
             <Route exact path='/scores' component={RecordedScores} />
 	    </View>
