@@ -36,6 +36,9 @@ function colorNumbersGetter(){
   numbers = shuffle(numbers);
 
 }
+
+ // Functions coloredsGetter, colorsGetter, and reservedColorsGetter are out of ColoredButtons because it is too big, not because they actually need to be global.
+
 function coloredsGetter(){
   var coloreds = [];
   for(var i = 0; i < pairs; i++){
@@ -276,7 +279,7 @@ class ColoredButtons extends React.Component{
 
   }
 
-  async clearData(){
+  async clearData(){ // Only used for manually cleaning data
     await AsyncStorage.clear();
   }
 
