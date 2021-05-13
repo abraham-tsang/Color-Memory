@@ -263,19 +263,47 @@ class ColoredButtons extends React.Component{
   async saveWinnerData(){
 
     this.setState({dialogVisible: false});
-    var total = await AsyncStorage.getItem('total');
-    if(typeof(total) !== 'string'){
-      total = 0;
+    var keys = await AsyncStorage.getAllKeys();
+    if(keys.length < 11){ // 5 usernames + 5 scores + total = 11 keys
+      var total = await AsyncStorage.getItem('total');
+      if(typeof(total) !== 'string'){
+        total = 0;
+      }
+      await AsyncStorage.setItem(
+        'Username ' + (parseInt(total) + 1).toString(), this.state.username
+      );
+      await AsyncStorage.setItem(
+        'Score ' + (parseInt(total) + 1).toString(), this.state.score.toString()
+      );
+      await AsyncStorage.setItem(
+        'total', (parseInt(total) + 1).toString()
+      );
     }
-    await AsyncStorage.setItem(
-      'Username ' + (parseInt(total) + 1).toString(), this.state.username
-    );
-    await AsyncStorage.setItem(
-      'Score ' + (parseInt(total) + 1).toString(), this.state.score.toString()
-    );
-    await AsyncStorage.setItem(
-      'total', (parseInt(total) + 1).toString()
-    );
+    else{
+      // Find the lowest score
+      var scores = [];
+      var temp = '';
+      for(var i = 0; i < 5; i++){
+	temp = await AsyncStorage.getItem('Score ' + (i+1).toString());
+	scores.push(temp);
+      }
+      var lowest = 0;
+      for(var i = 1; i < scores.length; i++){
+        if(parseInt(scores[i]) < parseInt(scores[lowest])){
+          lowest = i;
+        }
+      }
+      
+      if(this.state.score > parseInt(scores[lowest])){
+        await AsyncStorage.setItem(
+          'Username ' + (parseInt(lowest) + 1).toString(), this.state.username
+        );
+        await AsyncStorage.setItem(
+          'Score ' + (parseInt(lowest) + 1).toString(), this.state.score.toString()
+        );
+      }
+
+    }
 
   }
 
