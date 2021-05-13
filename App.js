@@ -179,6 +179,9 @@ class ColoredButtons extends React.Component{
       username: '',
       dialogVisible: false,
     };
+
+    // Functions changeColor and saveWinnerData are the biggies.
+
     this.changeColor = this.changeColor.bind(this);
     //this.onChangeText = this.onChangeText.bind(this);
     this.saveWinnerData = this.saveWinnerData.bind(this);
@@ -264,6 +267,7 @@ class ColoredButtons extends React.Component{
 
     this.setState({dialogVisible: false});
     var keys = await AsyncStorage.getAllKeys();
+    // Limit to top 5
     if(keys.length < 11){ // 5 usernames + 5 scores + total = 11 keys
       var total = await AsyncStorage.getItem('total');
       if(typeof(total) !== 'string'){
@@ -293,7 +297,8 @@ class ColoredButtons extends React.Component{
           lowest = i;
         }
       }
-      
+
+      // If current score is higher than lowest score
       if(this.state.score > parseInt(scores[lowest])){
         await AsyncStorage.setItem(
           'Username ' + (parseInt(lowest) + 1).toString(), this.state.username
@@ -382,12 +387,6 @@ class ColoredButton extends React.Component{
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginHorizontal: 16,
-  },
   columnofbuttons: {
     flexDirection: 'column',
     position: 'absolute',
