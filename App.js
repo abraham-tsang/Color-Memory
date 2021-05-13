@@ -74,12 +74,14 @@ class App extends React.Component{
       <SafeAreaView style={styles.container}>
         <View>
           <NativeRouter>
+            <View style={styles.rowofbuttons}>
             <Link to='/game'>
               <Text>Play Game</Text>
             </Link>
             <Link to='/scores'>
               <Text>Read Scores</Text>
             </Link>
+	    </View>
             <Route exact path='/game' component={ColoredButtons} />
             <Route exact path='/scores' component={RecordedScores} />
           </NativeRouter>
