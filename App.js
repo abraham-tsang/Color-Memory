@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Button, View, SafeAreaView, Text, AsyncStorage } from 'react-native';
 import Dialog from 'react-native-dialog';
 import {NativeRouter, Route, Link} from 'react-router-native';
-
+import { Table, Row, Rows } from 'react-native-table-component';
 
 var pairs = 8;
 var colors = ['blue', 'green', 'yellow', 'red', 'orange', 'pink', 'black', 'purple'];
@@ -132,16 +132,47 @@ class RecordedScores extends React.Component{
 
   render(){
     var ranks = [];
+   /* 
     for(var i = 0; i < this.state.total[1]; i++){
       ranks.push(
         <Text>{(i+1).toString() + '. ' + this.state.usernamesandscores[i][0] + ' ' + this.state.usernamesandscores[i][1]}</Text>
       );
+      
     }
+    */
+	  
+    var rowofranks = [];
+    var temp = [];
+    for(var i = 0; i < this.state.total[1]; i++){
+      temp = [];
+      rowofranks = [];
+      temp.push((i+1).toString());
+      temp.push('. ');
+      temp.push(this.state.usernamesandscores[i][0]);
+      temp.push(' ');
+      temp.push(this.state.usernamesandscores[i][1]);
+      /*rowofranks.push(
+        temp
+      );*/
+      ranks.push(
+        temp
+      );
+    }
+      
+	    
 
     return(
+      /*
       <View>
         {ranks}
       </View>
+      */
+      <View>
+        <Table>
+          <Rows data={ranks}/>
+	</Table>
+      </View>
+      
     );
   }
 
@@ -354,4 +385,3 @@ const styles = StyleSheet.create({
 });
 
 export default App;
-
