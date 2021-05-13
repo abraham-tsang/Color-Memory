@@ -72,7 +72,6 @@ class App extends React.Component{
       score: 0,
     };
   }
- 
   render(){
     return(	    
       <SafeAreaView>
@@ -82,9 +81,6 @@ class App extends React.Component{
               <Link to='/game'>
                 <Text>Play Game</Text>
               </Link>
-	    </View>
-	    <View style={{position: 'absolute', left: windowWidth/2, top: 5}}>
-              <Text>{this.state.score}</Text>
 	    </View>
 	    <View style={{position: 'absolute', right: 5, top: 5}}>
               <Link to='/scores'>
@@ -310,16 +306,14 @@ class ColoredButtons extends React.Component{
     //this.clearData();
 
     return(
-      <View style={styles.columnofbuttons}>
-        {col}
-        <View>
-	  <Text style={styles.scorestyle}>
+      <View>
+        <View style={{position: 'absolute', top: 5, left: windowWidth/2}}>
+	  <Text>
             {this.state.score}
 	  </Text>
-	  <Text>
-            {this.state.numbers /* Maybe as hint in the future, now as stabilizer */ }
-	  </Text>
         </View>
+      <View style={styles.columnofbuttons}>
+        {col}
 	<View>
           <Dialog.Container visible={this.state.dialogVisible}>
             <Dialog.Title>You won!!!</Dialog.Title>
@@ -331,7 +325,7 @@ class ColoredButtons extends React.Component{
           </Dialog.Container>
 	</View>
       </View>
-     
+      </View>
     );
   }
  
