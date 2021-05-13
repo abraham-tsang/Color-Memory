@@ -77,18 +77,18 @@ class App extends React.Component{
       <SafeAreaView>
         <View>
           <NativeRouter>
-            <View style={{position: 'absolute', left: 5, top: 5}}>
+            <View style={styles.gameview}>
               <Link to='/game'>
                 <Text>Play Game</Text>
               </Link>
 	    </View>
-	    <View style={{position: 'absolute', right: 5, top: 5}}>
+	    <View style={styles.scoreview}>
               <Link to='/scores'>
                 <Text>Read Scores</Text>
               </Link>
 	    </View>
-	    <View style={{position: 'absolute'}}>
-            <Route exact path='/game' render={() => <ColoredButtons />} />
+	    <View style={styles.routeview}>
+            <Route exact path='/game' component={ColoredButtons} />
             <Route exact path='/scores' component={RecordedScores} />
 	    </View>
           </NativeRouter>
@@ -155,9 +155,9 @@ class RecordedScores extends React.Component{
     }
       
     return(
-      <View style={styles.listofranks}>
+      <View style={styles.rankview}>
         <Table>
-          <Rows data={ranks} style={{height: 30, width: 300}} flexArr={[1, 5, 1]} />
+          <Rows data={ranks} style={styles.rankstyle} flexArr={[1, 5, 1]} />
 	</Table>
       </View>
     );
@@ -307,7 +307,7 @@ class ColoredButtons extends React.Component{
 
     return(
       <View>
-        <View style={{position: 'absolute', top: 5, left: windowWidth/2}}>
+        <View style={styles.scorestyle}>
 	  <Text>
             {this.state.score}
 	  </Text>
@@ -372,7 +372,7 @@ const styles = StyleSheet.create({
     height: 40,
     width: 40,
   },
-  listofranks: {
+  rankview: {
     position: 'absolute', 
     top: windowHeight/3,
     left: windowWidth/6, 
@@ -383,6 +383,23 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 5,
     left: windowWidth/2,
+  },
+  rankstyle: {
+    height: 30,
+    width: 300,
+  },
+  gameview: {
+    position: 'absolute', 
+    left: 5, 
+    top: 5
+  },
+  scoreview: {
+    position: 'absolute', 
+    right: 5, 
+    top: 5
+  },
+  routeview: {
+    position: 'absolute'
   },
 });
 
